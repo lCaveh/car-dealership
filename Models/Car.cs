@@ -8,12 +8,14 @@ namespace Dealership {
     private string MakeModel;
     private int Price;
     private int Miles;
+    private string Message;
 
-    public Car(string makeModel, int price, int miles) // Constructor method for Car Class
+    public Car(string makeModel, int price, int miles, string message) // Constructor method for Car Class
     {
       MakeModel = makeModel;
       Price = price;
       Miles = miles;
+      Message = message;
     }
 
     public string GetMakeModel()
@@ -28,16 +30,26 @@ namespace Dealership {
     {
       return Miles;
     }
+    public string GetMessage()
+    {
+      return Message;
+    }
 
     public bool WorthBuying(int maxPrice)
     {
       return (Price <= maxPrice);
     }
 
+    public bool UnderMileage(int maxMiles)
+    {
+      return (Miles <= maxMiles);
+    }
+
     public void SetPrice(int newPrice)
     {
       Price = newPrice;
     }
+
   }
 
 }
