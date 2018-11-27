@@ -1,21 +1,24 @@
 using System;
 using System.Collections.Generic;
 
-namespace Dealership {
-
-  class Car
+namespace Dealership.Models
+{
+  public class Car
   {
     private string MakeModel;
     private int Price;
     private int Miles;
     private string Message;
+    private static List<Car> Instances = new List<Car> {};
 
-    public Car(string makeModel, int price, int miles, string message) // Constructor method for Car Class
+    public Car(string makeModel, int price, int miles, string message)
     {
       MakeModel = makeModel;
       Price = price;
       Miles = miles;
       Message = message;
+      Instances.Add(this);
+
     }
 
     public string GetMakeModel()
@@ -45,11 +48,22 @@ namespace Dealership {
       return (Miles <= maxMiles);
     }
 
-    public void SetPrice(int newPrice)
+    public static List<Car> GetAll()
     {
-      Price = newPrice;
+        return Instances;
     }
-
+    public static List<Car> GetMatchResult(int maxPrice, int maxMiles)
+    {
+      List<Car> filteredList = new List<Car>() {};
+      foreach(Car automobile in Instances)
+      {
+        if (automobile.WorthBuying(maxPrice) && automobile.UnderMileage(maxMiles))
+        {
+          filteredList.Add(automobile);
+        }
+      }
+      return filteredList;
+    }
   }
 
 }
